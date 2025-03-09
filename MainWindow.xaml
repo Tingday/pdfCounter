@@ -1,0 +1,90 @@
+﻿<Window x:Class="PDF页数统计.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PDF页数统计"
+        mc:Ignorable="d"
+        Title="页码统计软件" Height="531" Width="442" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <!-- 第一行按钮 -->
+        <Label Content="支持拖拽文件" VerticalAlignment="Top" Width="140" Margin="10,13,0,0" Height="29" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" FontSize="14"  FontFamily="宋体" HorizontalAlignment="Left" />
+        <Button Content="打开当前" HorizontalAlignment="Left" VerticalAlignment="Top" Width="71" Margin="171,13,0,0" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Height="29" Click="ButtonDaKai_Click"/>
+        <Button Content="清空" 
+                Name="ButtonQingKong"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" Width="71" Margin="261,13,0,0" 
+                Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" 
+                Height="29"
+                Click="ButtonQingKong_Click"/>
+        <Button 
+            Content="移除选中"
+            HorizontalAlignment="Left" VerticalAlignment="Top" Width="63" Margin="347,13,0,0" 
+            Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Height="29"
+            Click="ButtonYiChu_Click"/>
+
+        <!-- 数据列表框 -->
+        <DataGrid x:Name="GridWenJian" 
+                  IsReadOnly="True"
+                  HorizontalAlignment="Left"
+                  Height="237"
+                  VerticalAlignment="Top" 
+                  Width="400" 
+                  Margin="10,47,0,0" 
+                  AllowDrop="True" 
+                  DragEnter="GridWenJian_DragEnter"
+                  Drop="GridWenJian_Drop"
+                  AutoGenerateColumns="False" GridLinesVisibility="Horizontal" SelectionChanged="GridWenJian_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="文件路径" Binding="{Binding}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- 停止和统计按钮 -->
+        <Button Content="停止" 
+                Name="ButtonTingZhi"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Margin="10,289,0,0" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Height="27" Click="ButtonTingZhi_Click"/>
+        <Button Content="统计" 
+                Name="buttonTongJi" 
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top" Width="98"
+                Margin="312,289,0,0" 
+                Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" 
+                Height="27" 
+                Click="ButtonTongJi_Click"/>
+
+        <!-- 附加费、总页、单价、总价 -->
+        <Label Content="总价："  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="284,327,0,0" Width="126"/>
+        <TextBox HorizontalAlignment="Left" Name="TextBoxZongJia" VerticalAlignment="Top" Width="126" Margin="284,363,0,0" Height="25" Text="0" />
+
+        <Label Content="总页：" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="104,327,0,0" Width="93"/>
+        <TextBox Text="1" Name="TextBoxCount" HorizontalAlignment="Left" VerticalAlignment="Top" Width="93" Margin="104,363,0,0" Height="26" TextChanged="TextBoxCount_TextChanged"   />
+
+        <Label Content="单价："  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="213,327,0,0" RenderTransformOrigin="0.779,0.56" Width="62"/>
+        <TextBox HorizontalAlignment="Left" Name="TextBoxDanJia" VerticalAlignment="Top" Width="62" Margin="213,363,0,0" Text="0.05" Height="25" TextChanged="TextBoxDanJia_TextChanged"/>
+
+
+        <Label Content="附加费："   HorizontalAlignment="Left" VerticalAlignment="Top" Margin="13,327,0,0" Width="73"/>
+        <TextBox HorizontalAlignment="Left" Name="TextBoxFuJia" VerticalAlignment="Top" Width="73" Margin="13,363,0,0" Height="26" Text="0" TextChanged="TextBoxFuJia_TextChanged"/>
+
+        <!-- 问题件处理 -->
+        <Label Content="问题件处理（页码为0或打不开出错）" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,391,0,0" Width="300"/>
+        <ListBox Name="ListBoxWenTi"
+            HorizontalAlignment="Left" Height="67" VerticalAlignment="Top" Width="265" Margin="10,416,0,0" />
+
+        <!-- 删除、清空、打开问题件按钮 -->
+        <Button Content="删除" HorizontalAlignment="Left" VerticalAlignment="Top" Width="60" Margin="350,457,0,0" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Height="26" Click="ButtonWenTiShanChu"/>
+        <Button Content="清空"
+                Name="ButtonQingKongWenTi"
+                Click="ButtonQingKongWenTi_Click"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                Width="58" Margin="284,457,0,0" 
+                Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Height="26"/>
+        <Button Content="打开问题件" HorizontalAlignment="Left" VerticalAlignment="Top" Width="126" Margin="284,416,0,0" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Height="28" Click="ButtonWenTi"/>
+        <Button Content="访问主页"
+                Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"
+                Click="ButtonFangWen_Click"
+                HorizontalAlignment="Left" Height="27" Margin="91,289,0,0" VerticalAlignment="Top" Width="59"/>
+    </Grid>
+</Window>
